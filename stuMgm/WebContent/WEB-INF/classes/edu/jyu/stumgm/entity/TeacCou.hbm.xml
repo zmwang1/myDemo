@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="edu.jyu.stumgm.entity.TeacCou" table="teac_cou" catalog="myapp">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="teacher" class="edu.jyu.stumgm.entity.Teacher" fetch="select">
+            <column name="teac_id" length="45" not-null="true" />
+        </many-to-one>
+        <many-to-one name="course" class="edu.jyu.stumgm.entity.Course" fetch="select">
+            <column name="cou_id" length="45" not-null="true" />
+        </many-to-one>
+        <set name="stuCous" table="stu_cou" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="teac_cou_id" />
+            </key>
+            <one-to-many class="edu.jyu.stumgm.entity.StuCou" />
+        </set>
+    </class>
+</hibernate-mapping>

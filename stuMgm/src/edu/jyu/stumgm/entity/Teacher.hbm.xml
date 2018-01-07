@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="edu.jyu.stumgm.entity.Teacher" table="teacher" catalog="myapp">
+        <id name="id" type="string">
+            <column name="id" length="45" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="20" not-null="true" />
+        </property>
+        <property name="passwd" type="string">
+            <column name="passwd" length="20" not-null="true" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="4" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="20" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="20" />
+        </property>
+        <set name="teacCous" table="teac_cou" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="teac_id" length="45" not-null="true" />
+            </key>
+            <one-to-many class="edu.jyu.stumgm.entity.TeacCou" />
+        </set>
+    </class>
+</hibernate-mapping>
